@@ -144,39 +144,39 @@ def debrand(ep):
         return
     import random
     for b in ep['beats']:
-        if b.get('lang') == episodes.SRC and any(k in b.get('text', '') for k in ('Seite', 'Link im Profil')):
+        if b.get('lang') == episodes.SRC and any(k in b.get('text', '') for k in ('on the site', 'Link in profile')):
             b['text'] = random.choice(episodes.FOLLOW_CTAS)
 
 
 FORMAT_TAGS = {
-    'sahne': ['#englischsprechen', '#englischdialog'], 'kelime': ['#englischvokabeln', '#vokabeln'],
-    'quiz': ['#englischquiz', '#englischtest'], 'av': ['#wortsuche', '#englischvokabeln'],
+    'sahne': ['#germanconversation', '#speakgerman'], 'kelime': ['#germanvocabulary', '#germanwords'],
+    'quiz': ['#germanquiz', '#derdiedas'], 'av': ['#wordsearch', '#germanvocabulary'],
 }
 
 
 def social_captions(ep, title):
-    """TikTok ve Instagram için hazır açıklama + hashtag (İngilizce öğrenen Almanca konuşanlara yönelik)."""
+    """TikTok ve Instagram için hazır açıklama + hashtag (Almanca öğrenen İngilizce konuşanlara yönelik)."""
     import re
     lvl = (re.search(r'\b([ABC][12])\b', ep.get('tag', '')) or [None, 'A1'])[1]
     clean = re.sub(r'\s*[|#].*$', '', title).strip()
     ftags = FORMAT_TAGS.get(ep['format'], [])
-    ask = {'quiz': 'Wie viele wusstest du? Schreib es in die Kommentare 👇', 'av': 'Wie viele hast du gefunden? 👇',
-           'kelime': 'Speichern und morgen wiederholen 📌', 'sahne': 'Speichern und laut nachsprechen 🗣️'}.get(ep['format'], 'Speichern 📌')
-    tiktok = f"{clean}\n{ask}\n\n" + ' '.join(['#englisch', '#englischlernen', ftags[0] if ftags else '#english', f'#englisch{lvl.lower()}', '#fyp'])
-    insta = (f"{clean} 🇬🇧\n{ask}\nJeden Tag neues Englisch! Folge 🔔\n\n"
-             + ' '.join(['#englisch', '#englischlernen', '#englischkurs', *ftags, f'#englisch{lvl.lower()}', '#english',
-                         '#learnenglish', '#sprachenlernen', '#deutsch', '#fyp']))
+    ask = {'quiz': 'How many did you get? Comment 👇', 'av': 'How many did you find? 👇',
+           'kelime': 'Save it and review tomorrow 📌', 'sahne': 'Save it and repeat out loud 🗣️'}.get(ep['format'], 'Save it 📌')
+    tiktok = f"{clean}\n{ask}\n\n" + ' '.join(['#learngerman', '#german', ftags[0] if ftags else '#deutsch', f'#german{lvl.lower()}', '#fyp'])
+    insta = (f"{clean} 🇩🇪\n{ask}\nNew German every day! Follow 🔔\n\n"
+             + ' '.join(['#learngerman', '#german', '#germanlanguage', *ftags, f'#german{lvl.lower()}', '#deutsch',
+                         '#deutschlernen', '#languagelearning', '#studygerman', '#fyp']))
     return tiktok, insta
 
 
 def metadata(ep):
     site = os.environ.get('SITE_URL', '').strip()
-    tags = ['englisch', 'englisch lernen', 'englisch für anfänger', 'englisch vokabeln', 'english', 'learn english',
-            'englischkurs', ep['format']] + (['fenek'] if site else [])
+    tags = ['learn german', 'german', 'german lesson', 'german for beginners', 'german vocabulary', 'der die das',
+            'deutsch lernen', 'speak german', ep['format']] + (['fenek'] if site else [])
     desc = (f"{ep.get('desc', '')}\n\n"
-            + (f'Alle Lektionen gratis: {site}\n' if site else '')
-            + 'Jeden Tag neue Englisch-Videos. Folge und verbessere dein Englisch jeden Tag ein bisschen! 🔔\n\n'
-            '#englisch #englischlernen #english #shorts')
+            + (f'All lessons free: {site}\n' if site else '')
+            + 'New German videos every day. Follow and get a little better at German every day! 🔔\n\n'
+            '#learngerman #german #deutsch #shorts')
     return ep['title'][:100], desc, tags
 
 
@@ -200,7 +200,7 @@ def main():
         try:
             log(f'channel: {upload.check_channel()}')
         except Exception as e:
-            notify.message(f'❌ İngilizce (DE) kanalı: YouTube bağlantısı kurulamadı (yetki süresi dolmuş olabilir).\n{str(e)[:300]}')
+            notify.message(f'❌ Almanca (EN) kanalı: YouTube bağlantısı kurulamadı (yetki süresi dolmuş olabilir).\n{str(e)[:300]}')
             gh('error', f'channel check failed: {e}'); raise SystemExit(1)
 
     hist = load_hist()
@@ -238,7 +238,7 @@ def main():
         mp4 = render(ep, out)
     except Exception as e:
         traceback.print_exc()
-        notify.message(f"❌ İngilizce (DE) kanalı: video üretilemedi ({ep['format']}).\n{str(e)[:300]}")
+        notify.message(f"❌ Almanca (EN) kanalı: video üretilemedi ({ep['format']}).\n{str(e)[:300]}")
         gh('error', f'build failed: {e}'); raise SystemExit(1)
     title, desc, tags = metadata(ep)
     (out / 'meta.json').write_text(json.dumps({'title': title, 'description': desc, 'tags': tags, 'duration': total}, indent=2, ensure_ascii=False), encoding='utf-8')
@@ -257,12 +257,12 @@ def main():
         vid = upload.upload(mp4, title, desc, tags, mode, category='27')
     except upload.QuotaError as e:
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
-        notify.message(f'⏳ İngilizce (DE) kanalı: YouTube kotası doldu, video sıraya alındı (sonraki saatte tekrar denenecek).\n{title}')
+        notify.message(f'⏳ Almanca (EN) kanalı: YouTube kotası doldu, video sıraya alındı (sonraki saatte tekrar denenecek).\n{title}')
         gh('warning', f'quota: queued ({e})'); return
     except Exception as e:
         traceback.print_exc()
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
-        notify.video(mp4, f'❌ İngilizce (DE) kanalı: yükleme başarısız, sıraya alındı.\n{title}\n{str(e)[:300]}')
+        notify.video(mp4, f'❌ Almanca (EN) kanalı: yükleme başarısız, sıraya alındı.\n{title}\n{str(e)[:300]}')
         gh('error', f'upload failed: {e}'); raise SystemExit(1)
     new = not PUBLISHED.exists()
     with PUBLISHED.open('a', newline='', encoding='utf-8') as f:
@@ -279,7 +279,7 @@ def main():
     if notify.todays_post() != 'video' or n != 1:
         log('telegram: bugün video gönderilmiyor (günde 1 gönderi)'); return
     # Telegram: orijinal dosya (TikTok/Instagram'a kaliteli yüklemek için) + hazır açıklamalar (ayrı mesaj: kolay kopyalama)
-    notify.document(mp4, f'✅ İngilizce (DE) kanalına yüklendi ({n}/{os.environ.get("MAX_PER_DAY") or 4} bugün)\n'
+    notify.document(mp4, f'✅ Almanca (EN) kanalına yüklendi ({n}/{os.environ.get("MAX_PER_DAY") or 4} bugün)\n'
                          f'{title}\nhttps://youtube.com/shorts/{vid}\nFormat: {ep["format"]} · {total:.0f} sn')
     tiktok, insta = social_captions(ep, title)
     notify.copyable('🎵 TikTok açıklaması (kutuya dokun → kopyalanır):', tiktok)

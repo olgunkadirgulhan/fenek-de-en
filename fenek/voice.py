@@ -38,10 +38,10 @@ PIPER_SLOW = 1.2   # Piper'ın konuşma süresi çarpanı: öğrenenler için ~%
 
 # Microsoft sinir ağı sesleri (Azure ve edge-tts'de aynı isimler). Tilki: çok dilli Vivienne (kullanıcı seçimi,
 # yerli tr-TR sesleri beğenilmedi). Yedek erkek Türkçe ses: de-DE-FlorianMultilingualNeural.
-# de-en kanalı: Max ve Lily İngilizce (ABD), tilki Almanca anlatır (çok dilli ses)
-MS_VOICE = {'emre': 'en-US-AndrewNeural', 'lena': 'en-US-AvaNeural', 'fenek': 'fr-FR-VivienneMultilingualNeural'}
+# en-de kanalı: Tom ve Lena Almanca konuşur, tilki İngilizce anlatır (çok dilli ses)
+MS_VOICE = {'emre': 'de-DE-ConradNeural', 'lena': 'de-DE-KatjaNeural', 'fenek': 'fr-FR-VivienneMultilingualNeural'}
 LOCALE = {'de': 'de-DE', 'tr': 'tr-TR', 'en': 'en-US'}
-MS_RATE = {'de': '+0%', 'tr': '+0%', 'en': '-8%'}   # İngilizce biraz yavaş: öğrenenler rahat takip etsin
+MS_RATE = {'de': '-8%', 'tr': '+0%', 'en': '+0%'}   # Almanca biraz yavaş: öğrenenler rahat takip etsin
 # Microsoft sesleri zaten temiz: sadece baş/son sessizlik kırpılır
 CLEAN = ('silenceremove=start_periods=1:start_threshold=-50dB,'
          'areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.12,areverse,'

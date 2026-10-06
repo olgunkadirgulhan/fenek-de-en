@@ -143,13 +143,13 @@ function background(t, theme, poster) {
   if (deco !== "menu") {
     s += `<g transform="rotate(2 800 530)"><rect x="640" y="420" width="320" height="215" rx="18" fill="#FFF7E6" stroke="${INK}" stroke-width="8"/>`;
     s += `<text x="800" y="545" text-anchor="middle" font-size="105">${poster ? poster.emoji : "📚"}</text>`;
-    s += `<text x="800" y="612" text-anchor="middle" class="cap" font-size="34" fill="${INK}">${esc(poster ? poster.label : "ENGLISH")}</text></g>`;
+    s += `<text x="800" y="612" text-anchor="middle" class="cap" font-size="34" fill="${INK}">${esc(poster ? poster.label : "DEUTSCH")}</text></g>`;
   }
   s += `<rect y="1240" width="${W}" height="${H - 1240}" fill="#C9956A"/><rect y="1240" width="${W}" height="18" fill="#A87850"/>`;
   s += Array.from({ length: 6 }, (_, i) => `<path d="M${i * 200} 1258 L${i * 200 - 120} ${H}" stroke="#B9855B" stroke-width="6"/>`).join("");
   // menü tahtası
   if (deco === "menu") s += `<g transform="rotate(-2 800 560)"><rect x="620" y="440" width="360" height="250" rx="16" fill="#2E3B35" stroke="#7A5234" stroke-width="16"/>`
-    + `<text x="800" y="500" text-anchor="middle" fill="#fff" class="cap" font-size="40">MENU</text>`
+    + `<text x="800" y="500" text-anchor="middle" fill="#fff" class="cap" font-size="40">MENÜ</text>`
     + `<text x="650" y="560" fill="#F7E7C6" font-size="34" font-weight="800">Kaffee ....... 3 €</text><text x="650" y="610" fill="#F7E7C6" font-size="34" font-weight="800">Kuchen ...... 4 €</text><text x="650" y="660" fill="#F7E7C6" font-size="34" font-weight="800">Tee ........... 2 €</text></g>`;
   // pencere + bitki
   s += `<rect x="70" y="470" width="250" height="230" rx="14" fill="#FFF7E6" stroke="${INK}" stroke-width="8"/><path d="M195 470 v230 M70 585 h250" stroke="${INK}" stroke-width="7"/><circle cx="265" cy="525" r="26" fill="#FFD166"/>`;
@@ -170,7 +170,7 @@ function counter(t, showCake, showReceipt, recT) {
     s += `<text x="150" y="58" text-anchor="middle" class="cap" font-size="40" fill="${INK}">RECHNUNG</text>`;
     s += `<text x="30" y="130" font-size="34" font-weight="800" fill="${INK}">Kaffee</text><text x="270" y="130" text-anchor="end" font-size="34" font-weight="800" fill="${INK}">3,00</text>`;
     s += `<text x="30" y="185" font-size="34" font-weight="800" fill="${INK}">Kuchen</text><text x="270" y="185" text-anchor="end" font-size="34" font-weight="800" fill="${INK}">4,00</text>`;
-    s += `<path d="M30 215 h240" stroke="${INK}" stroke-width="4" stroke-dasharray="10 8"/><text x="30" y="270" class="cap" font-size="40" fill="#E4572E">TOTAL</text><text x="270" y="270" text-anchor="end" class="cap" font-size="40" fill="#E4572E">$7</text></g>`;
+    s += `<path d="M30 215 h240" stroke="${INK}" stroke-width="4" stroke-dasharray="10 8"/><text x="30" y="270" class="cap" font-size="40" fill="#E4572E">SUMME</text><text x="270" y="270" text-anchor="end" class="cap" font-size="40" fill="#E4572E">7 €</text></g>`;
   }
   return s;
 }

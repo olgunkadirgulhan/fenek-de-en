@@ -1,6 +1,6 @@
-# Fenek DE-EN — otomatik İngilizce Shorts kanalı (Almanca konuşanlar için, de-en)
+# Fenek EN-DE — İngilizce bilenlere Almanca öğreten otomatik Shorts kanalı
 
-fenek-shorts (tr-de) altyapısının kopyası: anlatım Almanca (tilki), Max ve Lily İngilizce konuşur.
+fenek-shorts (tr-de) altyapısının kopyası: anlatım İngilizce (tilki), Tom ve Lena Almanca konuşur, İngilizce altyazı.
 
 Bilgisayar kapalıyken de çalışır: her şey GitHub Actions üzerinde (`.github/workflows/videos.yml`).
 

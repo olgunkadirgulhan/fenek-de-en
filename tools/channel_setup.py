@@ -12,12 +12,12 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 ROOT = Path(__file__).resolve().parent.parent
-DESC = ("Jeden Tag kurze Englisch-Videos! 🇬🇧\n"
-        "Vokabeln, Alltagsdialoge, Quiz und Wortsuche — alles mit deutscher Übersetzung.\n"
-        "Von A1 bis B1: für Anfänger, für die Schule, für Reisen und für den Beruf.\n"
-        "Lerne mit Max, Lily und unserem Fuchs jeden Tag ein paar Minuten Englisch. Folge jetzt! 🔔")
-KEYWORDS = ('englisch "englisch lernen" "englisch für anfänger" "englisch vokabeln" "learn english" '
-            '"englisch a1" "englisch a2" "englisch b1" "englisch sprechen" englischkurs')
+DESC = ("Learn German with short videos every day! 🇩🇪\n"
+        "Vocabulary, real-life dialogues, der/die/das quizzes and word searches — all explained in English.\n"
+        "From A1 to B1: for beginners, travellers, students and anyone moving to Germany.\n"
+        "Learn a few minutes of German every day with Tom, Lena and our fox. Follow now! 🔔")
+KEYWORDS = ('"learn german" german "german lesson" "german for beginners" "german vocabulary" "der die das" '
+            '"german a1" "german a2" "german b1" "speak german" deutsch')
 
 
 def main():

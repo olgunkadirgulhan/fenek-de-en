@@ -106,7 +106,7 @@ function ovQuiz(o, k, cd, t) {
   } else {
     if (o.kind === "rev") s += `<text x="540" y="590" text-anchor="middle" font-size="80">${o.emoji}</text>`;
     s += `<text x="540" y="${o.kind === "rev" ? 670 : 640}" text-anchor="middle" class="cap" font-size="${fit(o.word, 84, 16)}" fill="${INK}">${esc(o.word)}</text>`;
-    s += `<text x="540" y="${o.kind === "rev" ? 722 : 700}" text-anchor="middle" font-size="40" font-weight="800" fill="#5B6072">${esc(o.ask || "ne demek?")}</text>`;
+    s += `<text x="540" y="${o.kind === "rev" ? 722 : 700}" text-anchor="middle" font-size="40" font-weight="800" fill="#5B6072">${esc(o.ask || UI.mean || "ne demek?")}</text>`;
     o.opts.forEach((w, i) => {
       const ok = o.reveal && w === o.answer, dim = o.reveal && !ok, y = 760 + i * 118;
       s += `<g opacity="${dim ? .3 : 1}"><rect x="150" y="${y}" width="780" height="98" rx="26" fill="${ok ? "#16A37E" : "#F3EEE6"}" stroke="${INK}" stroke-width="6"/><text x="540" y="${y + 64}" text-anchor="middle" font-size="${fit(w, 48, 26)}" font-weight="900" fill="${ok ? "#fff" : INK}">${esc(w)}${ok ? " ✓" : ""}</text></g>`;
