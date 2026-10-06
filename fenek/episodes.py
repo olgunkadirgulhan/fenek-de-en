@@ -268,7 +268,8 @@ def make_episode(slot, hist, seed):
         pack = pick_least_used(packs, lambda p: p['id'], used, rng, lw)
         ep = {'kelime': ep_kelime, 'quiz': ep_quiz, 'av': ep_av}[fmt](pack, rng)
     ep['format'] = fmt
-    if NARRATION == 'lite':
+    # sadece kelime kartlarında: quiz/sahne/av'da soru-cevap sessiz kalınca uzun ölü hava oluşuyordu (2026-10-06 testi)
+    if NARRATION == 'lite' and fmt == 'kelime':
         lite(ep)
     ep['names'] = NAMES
     ep['tgt'] = TGT
