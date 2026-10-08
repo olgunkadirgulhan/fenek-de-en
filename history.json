@@ -11,11 +11,18 @@
    "format": "sahne",
    "topic": "family",
    "title": "Can you understand this German dialogue? Family 👨‍👩‍👧 #german"
+  },
+  {
+   "id": "20261008-1507-quiz",
+   "format": "quiz",
+   "topic": "a2land",
+   "title": "German quiz: Landscape 🤔 Test yourself in 3 questions! | A2"
   }
  ],
  "bank_used": [],
- "count": 2,
+ "count": 3,
  "sigs": [
-  "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee"
+  "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
+  "quiz|a2land|das Insekt/der Gipfel/die Küste"
  ]
 }
