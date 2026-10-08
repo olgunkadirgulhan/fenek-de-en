@@ -33,7 +33,7 @@ jobs:
           CHANNEL_KIND: general
           CHANNEL_LANG: en
           STATE_FILE: comment_replies.json
-          FIRST_QUESTIONS: "[\"Which word was new to you? 🤔\", \"How many did you get right? ✍️\", \"Can you make a sentence with one of these words? 🇩🇪\", \"Der, die or das: which one tricked you? 😅\", \"What topic should we learn next? 💡\"]"
+          FIRST_QUESTIONS: "[\"Which {topic} word was new to you? 🤔\", \"How many did you get right? ✍️\", \"Can you make a sentence about {topic} in German? 🇩🇪\", \"Der, die or das: which one tricked you? 😅\", \"What topic should we learn after {topic}? 💡\", \"Which word would you use first in Germany? 🇩🇪\", \"Did you understand everything without subtitles? 👀\", \"Write one {topic} word you already knew 👇\", \"Which word is the hardest to pronounce? 🗣️\", \"What's your German level right now: A1, A2 or B1? 📚\", \"Where are you learning German from? 🌍\", \"Would you survive this {topic} situation in Germany? 😄\", \"Which word sounds the funniest to you? 😂\", \"How long have you been learning German? ⏳\", \"Try it: translate one {topic} word in the comments ✍️\"]"
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"
