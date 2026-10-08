@@ -267,6 +267,12 @@ def main():
         QUEUE.mkdir(exist_ok=True); (QUEUE / f"{ep['id']}.json").write_text(json.dumps(ep, ensure_ascii=False), encoding='utf-8')
         notify.video(mp4, f'❌ Almanca (EN) kanalı: yükleme başarısız, sıraya alındı.\n{title}\n{str(e)[:300]}')
         gh('error', f'upload failed: {e}'); raise SystemExit(1)
+    try:  # formatın oynatma listesine ekle (tools/channel_setup.py → playlists.json)
+        pl = json.loads((HERE / 'playlists.json').read_text()) if (HERE / 'playlists.json').exists() else {}
+        if pl.get(ep['format']):
+            upload.add_to_playlist(pl[ep['format']], vid)
+    except Exception as e:  # noqa: BLE001 — liste hatası yüklemeyi bozmasın
+        log(f'playlist: {e}')
     new = not PUBLISHED.exists()
     with PUBLISHED.open('a', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
