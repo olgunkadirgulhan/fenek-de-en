@@ -17,12 +17,19 @@
    "format": "quiz",
    "topic": "a2land",
    "title": "German quiz: Landscape 🤔 Test yourself in 3 questions! | A2"
+  },
+  {
+   "id": "20261009-0529-kelime",
+   "format": "kelime",
+   "topic": "a1animals",
+   "title": "German vocabulary: Animals 🐾 level A1"
   }
  ],
  "bank_used": [],
- "count": 3,
+ "count": 4,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
-  "quiz|a2land|das Insekt/der Gipfel/die Küste"
+  "quiz|a2land|das Insekt/der Gipfel/die Küste",
+  "kelime|a1animals|das Schaf/der Fuchs/der Tiger/die Biene/die Ente"
  ]
 }
