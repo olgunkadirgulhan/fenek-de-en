@@ -23,13 +23,20 @@
    "format": "kelime",
    "topic": "a1animals",
    "title": "German vocabulary: Animals 🐾 level A1"
+  },
+  {
+   "id": "20261009-1240-sahne",
+   "format": "sahne",
+   "topic": "work",
+   "title": "Working life: German conversation 💼 | B1 #learngerman"
   }
  ],
  "bank_used": [],
- "count": 4,
+ "count": 5,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
-  "kelime|a1animals|das Schaf/der Fuchs/der Tiger/die Biene/die Ente"
+  "kelime|a1animals|das Schaf/der Fuchs/der Tiger/die Biene/die Ente",
+  "sahne|work|Gut. Wann könnten Sie anfangen?/Ich arbeite seit fünf Jahren in einem Büro./Ich würde gern etwa dreitausend Euro verdienen./Sobald ich den Vertrag unterschrieben habe./Warum interessieren Sie sich für diese Stelle?/Was sind Ihre Gehaltsvorstellungen?/Weil ich in einem internationalen Team arbeiten möchte./Wie viel Erfahrung haben Sie?/die Stelle"
  ]
 }
