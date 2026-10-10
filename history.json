@@ -41,16 +41,23 @@
    "format": "sahne",
    "topic": "doctor",
    "title": "Real-life German: At the doctor 🩺 A2"
+  },
+  {
+   "id": "20261010-1228-kelime",
+   "format": "kelime",
+   "topic": "b1wild",
+   "title": "Wildlife in German 🦉 | B1"
   }
  ],
  "bank_used": [],
- "count": 7,
+ "count": 8,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
   "kelime|a1animals|das Schaf/der Fuchs/der Tiger/die Biene/die Ente",
   "sahne|work|Gut. Wann könnten Sie anfangen?/Ich arbeite seit fünf Jahren in einem Büro./Ich würde gern etwa dreitausend Euro verdienen./Sobald ich den Vertrag unterschrieben habe./Warum interessieren Sie sich für diese Stelle?/Was sind Ihre Gehaltsvorstellungen?/Weil ich in einem internationalen Team arbeiten möchte./Wie viel Erfahrung haben Sie?/die Stelle",
   "av|a2tech|das Internet/der Akku/der Anruf/der Umschlag/die Tastatur",
-  "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Bauch"
+  "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Bauch",
+  "kelime|b1wild|das Eichhörnchen/der Hai/der Igel/die Fliege/die Schnecke"
  ]
 }
