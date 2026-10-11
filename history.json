@@ -53,10 +53,16 @@
    "format": "quiz",
    "topic": "b1edu",
    "title": "Der, die or das? Education ✍️ How many can you get?"
+  },
+  {
+   "id": "20261011-0528-kelime",
+   "format": "kelime",
+   "topic": "a2house",
+   "title": "Do you know these 5 German words? Housework 🧹 #german"
   }
  ],
  "bank_used": [],
- "count": 9,
+ "count": 10,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -65,6 +71,7 @@
   "av|a2tech|das Internet/der Akku/der Anruf/der Umschlag/die Tastatur",
   "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Bauch",
   "kelime|b1wild|das Eichhörnchen/der Hai/der Igel/die Fliege/die Schnecke",
-  "quiz|b1edu|der Schüler/der Stundenplan/die Grammatik"
+  "quiz|b1edu|der Schüler/der Stundenplan/die Grammatik",
+  "kelime|a2house|der Besen/der Eimer/der Gefrierschrank/der Staubsauger/die Glühbirne"
  ]
 }
