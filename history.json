@@ -59,10 +59,16 @@
    "format": "kelime",
    "topic": "a2house",
    "title": "Do you know these 5 German words? Housework 🧹 #german"
+  },
+  {
+   "id": "20261011-1229-sahne",
+   "format": "sahne",
+   "topic": "relations",
+   "title": "Real-life German: Relationships 💞 B1"
   }
  ],
  "bank_used": [],
- "count": 10,
+ "count": 11,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -72,6 +78,7 @@
   "sahne|doctor|Guten Tag, was fehlt Ihnen?/Haben Sie auch Bauchschmerzen?/Ich gebe Ihnen ein Rezept für ein Medikament./Ich habe Kopfschmerzen und Fieber./Nein, nur der Kopf tut weh./Seit gestern Abend./Seit wann?/Vielen Dank, Frau Doktor./der Bauch",
   "kelime|b1wild|das Eichhörnchen/der Hai/der Igel/die Fliege/die Schnecke",
   "quiz|b1edu|der Schüler/der Stundenplan/die Grammatik",
-  "kelime|a2house|der Besen/der Eimer/der Gefrierschrank/der Staubsauger/die Glühbirne"
+  "kelime|a2house|der Besen/der Eimer/der Gefrierschrank/der Staubsauger/die Glühbirne",
+  "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./der Streit"
  ]
 }
