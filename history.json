@@ -65,10 +65,16 @@
    "format": "sahne",
    "topic": "relations",
    "title": "Real-life German: Relationships 💞 B1"
+  },
+  {
+   "id": "20261011-1928-av",
+   "format": "av",
+   "topic": "a1school",
+   "title": "Sharp eyes? 🔍 School German word search"
   }
  ],
  "bank_used": [],
- "count": 11,
+ "count": 12,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -79,6 +85,7 @@
   "kelime|b1wild|das Eichhörnchen/der Hai/der Igel/die Fliege/die Schnecke",
   "quiz|b1edu|der Schüler/der Stundenplan/die Grammatik",
   "kelime|a2house|der Besen/der Eimer/der Gefrierschrank/der Staubsauger/die Glühbirne",
-  "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./der Streit"
+  "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./der Streit",
+  "av|a1school|das Buch/das Telefon/der Satz/die E-Mail/die Frage"
  ]
 }
