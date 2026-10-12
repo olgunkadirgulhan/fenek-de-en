@@ -77,10 +77,16 @@
    "format": "sahne",
    "topic": "restaurant",
    "title": "A complaint at the restaurant: German conversation 🍽️ | B1 #learngerman"
+  },
+  {
+   "id": "20261012-1228-kelime",
+   "format": "kelime",
+   "topic": "a1small",
+   "title": "German vocabulary: Questions & little words ❓ level A1"
   }
  ],
  "bank_used": [],
- "count": 13,
+ "count": 14,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -93,6 +99,7 @@
   "kelime|a2house|der Besen/der Eimer/der Gefrierschrank/der Staubsauger/die Glühbirne",
   "sahne|relations|Dann ruf ihn an und versöhnt euch./Du hast recht. Wir verloben uns ja nächsten Monat!/Du siehst bedrückt aus. Gibt es ein Problem mit deinem Partner?/Ich weiß. Ohne Vertrauen funktioniert nichts./In jeder Beziehung ist Kommunikation sehr wichtig./Nein! Er ist etwas eifersüchtig, und ich habe ihm nicht zugehört./Warum? Wollt ihr euch trennen?/Wir hatten gestern einen großen Streit./der Streit",
   "av|a1school|das Buch/das Telefon/der Satz/die E-Mail/die Frage",
-  "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Koch"
+  "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Koch",
+  "kelime|a1small|nur/okay/welcher/wie viel/wo"
  ]
 }
