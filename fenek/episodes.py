@@ -96,7 +96,9 @@ def ep_sahne(unit, rng):
                   pause(3.0, overlay=q, key='q', countdown=3, fenek=True),
                   beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key='q', sfx='ding', fenek=True, mood={'emre': 'happy'})]
     beats.append(beat('fenek', SRC, rng.choice([c for c in CTAS if 'How many' not in c]), overlay={'type': 'cta', 'unit': t, 'emoji': unit['emoji'], 'cefr': unit['cefr']}, key='cta', fenek=True, sfx_before='pop'))
-    title = rng.choice([f"{t}: German conversation {unit['emoji']} | {unit['cefr']} #learngerman",
+    title = rng.choice([f"German {unit['cefr']} conversation: {t} {unit['emoji']} #learngerman",  # arama: "german a1 conversation / listening"
+                        f"German {unit['cefr']} listening practice: {t} {unit['emoji']}",
+                        f"{t}: German conversation {unit['emoji']} | {unit['cefr']} #learngerman",
                         f"How Germans talk: {t} {unit['emoji']} | {unit['cefr']}",
                         f"Can you understand this German dialogue? {t} {unit['emoji']} #german",
                         f"Real-life German: {t} {unit['emoji']} {unit['cefr']}",
@@ -118,7 +120,7 @@ def ep_kelime(pack, rng):
                   beat('fenek', SRC, w[SRC], '', overlay=card, key=f'c{i}', fenek=True, nosub=True)]
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=["5 GERMAN WORDS", f"{up(t)} {pack['emoji']}"], tag=f"{pack['cefr']} · WORDS", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=rng.choice([f"5 German words: {t} {pack['emoji']} | {pack['cefr']} #learngerman", f"{t} in German {pack['emoji']} | {pack['cefr']}", f"Do you know these 5 German words? {t} {pack['emoji']} #german", f"{t}: 5 German words you need every day {pack['emoji']}", f"German vocabulary: {t} {pack['emoji']} level {pack['cefr']}"]), beats=beats,
+                title=rng.choice([f"German {pack['cefr']} vocabulary: {t} {pack['emoji']} #learngerman", f"5 German words: {t} {pack['emoji']} | {pack['cefr']} #learngerman", f"{t} in German {pack['emoji']} | {pack['cefr']}", f"Do you know these 5 German words? {t} {pack['emoji']} #german", f"{t}: 5 German words you need every day {pack['emoji']}", f"German vocabulary: {t} {pack['emoji']} level {pack['cefr']}"]), beats=beats,
                 desc=f"5 German words about {t} ({pack['cefr']}). With der/die/das, pronunciation and English meaning.")
 
 
@@ -161,7 +163,7 @@ def ep_quiz(pack, rng):
             beats.append(beat('emre', TGT, w[TGT], w[SRC], overlay={**q, 'reveal': True}, key=f'q{i}', sfx='ding', fenek=True, mood={'emre': 'happy'}))
     beats.append(beat('fenek', SRC, rng.choice(CTAS), overlay={'type': 'cta', 'unit': t, 'emoji': pack['emoji'], 'cefr': pack['cefr']}, key='cta', fenek=True, sfx_before='pop'))
     return dict(caption=['GERMAN QUIZ 🤔', f"{up(t)}"], tag=f"{pack['cefr']} · QUIZ", topic=pack['id'], theme='study', poster={'emoji': pack['emoji'], 'label': pack['title'][TGT].upper()[:18]},
-                title=rng.choice([f"German quiz: {t} 🤔 Test yourself in 3 questions! | {pack['cefr']}", f"How good is your German? {t} 🤔 {pack['cefr']}", f"3 questions, 1 topic: {t} 🧠 #learngerman", f"Get all 3 right and you're {pack['cefr']}: {t} 🤔", f"Der, die or das? {t} ✍️ How many can you get?"]), beats=beats,
+                title=rng.choice([f"German {pack['cefr']} test: {t} 🤔 3 quick questions", f"German quiz: {t} 🤔 Test yourself in 3 questions! | {pack['cefr']}", f"How good is your German? {t} 🤔 {pack['cefr']}", f"3 questions, 1 topic: {t} 🧠 #learngerman", f"Get all 3 right and you're {pack['cefr']}: {t} 🤔", f"Der, die or das? {t} ✍️ How many can you get?"]), beats=beats,
                 desc=f"A 3-question German quiz about {t} ({pack['cefr']}). How many did you get right? Tell me in the comments!")
 
 
