@@ -62,7 +62,7 @@ METH = {
     'sloth': ('SLOTH', 'a sloth', 0.24, 'sloth', 'sloth about 0.24 km/h on the ground'),
     'tortoise': ('TORTOISE', 'a giant tortoise', 0.3, 'turtle', 'giant tortoise about 0.3 km/h'),
     'walk': ('WALKING', 'walking', 5, 'walk', 'walking 5 km/h, nonstop'),
-    'run': ('RUNNING', 'jogging', 10, 'run', 'jogging 10 km/h, nonstop'),
+    'run': ('JOGGING', 'jogging', 10, 'run', 'jogging 10 km/h, nonstop'),
     'bike': ('BIKE', 'a bike', 20, 'bike', 'cycling 20 km/h, nonstop'),
     'horse': ('HORSE', 'a horse at a steady trot', 25, 'horse', 'horse trotting about 25 km/h, nonstop'),
     'bolt': ('USAIN BOLT', 'Usain Bolt at top speed', 44.72, 'run', 'Usain Bolt top speed 44.72 km/h (2009 world record race)'),
