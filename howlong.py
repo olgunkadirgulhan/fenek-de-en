@@ -79,12 +79,12 @@ BY = {'walk': 'on foot', 'run': 'jogging', 'bike': 'by bike', 'car': 'by car', '
       'horse': 'on a trotting horse', 'sound': 'at the speed of sound', 'light': 'at the speed of light',
       'snail': 'at the speed of a garden snail', 'sloth': 'at the speed of a sloth', 'tortoise': 'at the speed of a giant tortoise',
       'bolt': 'at Usain Bolt\'s top speed'}
-SMALL = {'of', 'the', 'to', 'vs', 'and', 'by', 'a', 'in', 'from', 'it', 'is', 'as', 'at', 'on', 'with'}
+SMALL = {'of', 'the', 'to', 'vs', 'and', 'by', 'a', 'in', 'from', 'it', 'is', 'as', 'at', 'on', 'with', 'or'}
 
 
 def tcase(t):
     w = t.split(' ')
-    return ' '.join(x.lower() if (i and x.lower() in SMALL) else (x[0].upper() + x[1:].lower() if x.isupper() and len(x) > 2 else x[:1].upper() + x[1:])
+    return ' '.join(x.lower() if (i and x.lower() in SMALL and not w[i - 1].endswith(('?', ':'))) else (x[0].upper() + x[1:].lower() if x.isupper() and len(x) > 2 else x[:1].upper() + x[1:])
                     for i, x in enumerate(w)).replace('L.a.', 'L.A.').replace('Iss', 'ISS').replace(' vs ', ' vs ')
 
 
@@ -154,7 +154,7 @@ def compare(h, rnd):
     if y < 70: return rnd.choice([f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.', f'Leave at 20, and you arrive at about {20 + y:,.0f}.'])
     if y < 400: return rnd.choice([f'That is about {y / 78.4:,.1f} human lifetimes.'.replace('.0 ', ' '), f'Someone who left the day you were born would still be going at age {min(y, 78):,.0f}.' if y > 78 else f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.'])
     if y < 1e6: return rnd.choice([f'That is about {y / 4500:,.1f} times longer than the pyramids of Giza have existed.'.replace('.0 ', ' '), f'That is roughly {y / 78.4:,.0f} human lifetimes.'])
-    return rnd.choice([(f'That is {y / 13.8e9:,.0f} times the age of the universe.' if y > 1.38e11 else f'That is {y / 13.8e9:,.1f} times the age of the universe.') if y > 1e9 else f'That is about {y / 66e6:,.2f} times as long ago as the dinosaurs died out.',
+    return rnd.choice([(f'That is {y / 13.8e9:,.0f} times the age of the universe.' if y > 1.38e11 else f'That is {y / 13.8e9:,.1f} times the age of the universe.') if y > 1e9 else (f'That is about {y / 66e6 * 100:,.0f} percent of the time since the dinosaurs died out.' if y < 66e6 else f'That is {y / 66e6:,.1f} times the time since the dinosaurs died out.'),
                        f'That is about {big(y / 78.4)} human lifetimes.'])
 
 
@@ -173,8 +173,18 @@ def sensible(dest, meth):
 
 def pick(rnd, kurgu=None):
     seen, rows = done(); recent = [r['topic_id'].split(':')[2] for r in rows[-4:] if r['topic_id'].count(':') >= 2]
-    for _ in range(2000):
-        k = kurgu or rnd.choice(['guess', 'guess', 'race', 'ladder', 'light'])
+    import howlong_more as HM
+    last_k = [r['topic_id'].split(':')[1] for r in rows[-3:] if r['topic_id'].startswith('hl:')]
+    allk = ['guess', 'race', 'ladder', 'light'] + HM.KURGU
+    for _ in range(3000):
+        k = kurgu or rnd.choice([x for x in allk if x not in last_k] or allk)
+        if k in HM.KURGU:
+            for _ in range(80):
+                key = HM.key_for(k, rnd)
+                if key is None: continue
+                tid = 'hl:' + ':'.join(str(x) for x in key)
+                if tid not in seen: return key, tid
+            continue
         if k == 'light':
             d = rnd.choice([x for x in DEST if DEST[x][5] == 'space']); key = ['light', d]
         else:
@@ -196,6 +206,8 @@ def pick(rnd, kurgu=None):
 
 
 def build(key, rnd):
+    import howlong_more as HM
+    if key[0] in HM.KURGU: return HM.build(key, rnd)
     k = key[0]; d = key[1]; D = DEST[d]
     src = [f'Distance: {D[4]}.']
     if k == 'guess':
@@ -472,7 +484,11 @@ def main():
         mp4 = L.render(v, OUT / f'long_{stamp}.mp4')
     else:
         key, tid = pick(rnd, kurgu); v = build(key, rnd); log(f'[howlong] {tid} → {v["title"]}')
-        mp4 = render(v, OUT / f'short_{stamp}.mp4')
+        if 'scenes' in v:
+            import howlong_more as HM
+            mp4 = HM.render(v, OUT / f'short_{stamp}.mp4')
+        else:
+            mp4 = render(v, OUT / f'short_{stamp}.mp4')
     if DRY:
         log(f'  [dry-run] {mp4}\n{v["desc"]}'); return
     import upload
