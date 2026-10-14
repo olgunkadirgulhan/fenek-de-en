@@ -96,7 +96,7 @@ def hours(dest, meth): return DEST[dest][2] / METH[meth][2]
 
 
 def big(n):
-    for v, w in ((1e12, 'trillion'), (1e9, 'billion'), (1e6, 'million'), (1e3, 'thousand')):
+    for v, w in ((1e18, 'quintillion'), (1e15, 'quadrillion'), (1e12, 'trillion'), (1e9, 'billion'), (1e6, 'million'), (1e3, 'thousand')):
         if n >= v:
             x = n / v
             return f'{x:,.0f} {w}' if x >= 10 else f'{x:.1f} {w}'.replace('.0 ', ' ')
@@ -151,6 +151,7 @@ def compare(h, rnd):
     if h < 48: return rnd.choice([f'That is about {h / 2:,.0f} movies back to back.', f'That is about {h / 8:,.1f} full work days.'.replace('.0 ', ' ')])
     if h < 24 * 21: return rnd.choice([f'That is {h / 24:,.0f} days and nights without stopping.', f'No sleep, no breaks, for {h / 24:,.0f} days straight.'])
     if y < 2: return rnd.choice([f'That is about {h / 168:,.0f} weeks.', f'That is about {h / 730:,.0f} months without a single break.'])
+    if y < 70: return rnd.choice([f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.', f'Leave at 20, and you arrive at about {20 + y:,.0f}.'])
     if y < 400: return rnd.choice([f'That is about {y / 78.4:,.1f} human lifetimes.'.replace('.0 ', ' '), f'Someone who left the day you were born would still be going at age {min(y, 78):,.0f}.' if y > 78 else f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.'])
     if y < 1e6: return rnd.choice([f'That is about {y / 4500:,.1f} times longer than the pyramids of Giza have existed.'.replace('.0 ', ' '), f'That is roughly {y / 78.4:,.0f} human lifetimes.'])
     return rnd.choice([f'That is {y / 13.8e9:,.2f} times the age of the universe.' if y > 1e9 else f'That is about {y / 66e6:,.2f} times as long ago as the dinosaurs died out.',
