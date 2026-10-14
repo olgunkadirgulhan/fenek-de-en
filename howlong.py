@@ -154,7 +154,7 @@ def compare(h, rnd):
     if y < 70: return rnd.choice([f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.', f'Leave at 20, and you arrive at about {20 + y:,.0f}.'])
     if y < 400: return rnd.choice([f'That is about {y / 78.4:,.1f} human lifetimes.'.replace('.0 ', ' '), f'Someone who left the day you were born would still be going at age {min(y, 78):,.0f}.' if y > 78 else f'That is about {y / 78.4 * 100:,.0f} percent of an average human life.'])
     if y < 1e6: return rnd.choice([f'That is about {y / 4500:,.1f} times longer than the pyramids of Giza have existed.'.replace('.0 ', ' '), f'That is roughly {y / 78.4:,.0f} human lifetimes.'])
-    return rnd.choice([f'That is {y / 13.8e9:,.2f} times the age of the universe.' if y > 1e9 else f'That is about {y / 66e6:,.2f} times as long ago as the dinosaurs died out.',
+    return rnd.choice([(f'That is {y / 13.8e9:,.0f} times the age of the universe.' if y > 1.38e11 else f'That is {y / 13.8e9:,.1f} times the age of the universe.') if y > 1e9 else f'That is about {y / 66e6:,.2f} times as long ago as the dinosaurs died out.',
                        f'That is about {big(y / 78.4)} human lifetimes.'])
 
 
