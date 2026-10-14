@@ -7,6 +7,10 @@ on:
     - cron: "53 0-6 * * *"
   workflow_dispatch:
     inputs:
+      auto:
+        description: Harici zamanlayıcı (cron-job.org) - planlı çalışma gibi davran
+        type: boolean
+        default: false
       dry_run:
         description: Render only, no upload
         type: boolean
@@ -24,7 +28,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   make:
-    if: github.event_name != 'schedule' || vars.CONTENT_MODE == 'howlong'
+    if: (github.event_name != 'schedule' && !inputs.auto) || vars.CONTENT_MODE == 'howlong'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -42,7 +46,7 @@ jobs:
           SHORTS_PER_DAY: ${{ vars.SHORTS_PER_DAY || '3' }}
           LONGS_PER_DAY: ${{ vars.LONGS_PER_DAY || '2' }}
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ]; then python howlong.py --auto; exit 0; fi
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.auto }}" = "true" ]; then python howlong.py --auto; exit 0; fi
           ARGS=""
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="--dry-run"
           [ "${{ inputs.mode }}" = "long" ] && ARGS="$ARGS --long"
