@@ -467,6 +467,7 @@ def main():
         today = [r for r in rows if r['quota_day'] == q]
         ns, nl = sum(r['kind'] == 'short' for r in today), sum(r['kind'] == 'long' for r in today)
         want_s, want_l = int(os.environ.get('SHORTS_PER_DAY') or 4), int(os.environ.get('LONGS_PER_DAY') or 1)
+        if datetime.now(timezone.utc).strftime('%a').lower()[:3] not in (os.environ.get('LONG_DAYS') or 'mon,wed,fri').split(','): want_l = 0   # haftada 3 uzun
         if ns < want_s: kind = 'short'
         elif nl < want_l: kind = 'long'
         else:
