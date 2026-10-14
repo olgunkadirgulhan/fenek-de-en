@@ -439,7 +439,7 @@ def record(tid, vid, kind, title, publish_at):
 
 def publish_at(kind, n_today):
     """Kota gününün sonunda yüklenir, ABD izlenme saatinde yayınlanır (aynı UTC günü)."""
-    slots = {'short': ['14:00', '17:30', '21:00'], 'long': ['15:30', '23:00']}[kind]
+    slots = {'short': ['13:00', '16:00', '19:00', '22:00'], 'long': ['18:00']}[kind]   # 19:00 UTC = UK/EU akşamı + ABD öğlen
     hh, mm = map(int, slots[min(n_today, len(slots) - 1)].split(':'))
     now = datetime.now(timezone.utc); t = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
     if t < now + timedelta(minutes=30): t = now + timedelta(minutes=40)
@@ -454,7 +454,7 @@ def main():
         _, rows = done(); q = quota_day()
         today = [r for r in rows if r['quota_day'] == q]
         ns, nl = sum(r['kind'] == 'short' for r in today), sum(r['kind'] == 'long' for r in today)
-        want_s, want_l = int(os.environ.get('SHORTS_PER_DAY') or 3), int(os.environ.get('LONGS_PER_DAY') or 2)
+        want_s, want_l = int(os.environ.get('SHORTS_PER_DAY') or 4), int(os.environ.get('LONGS_PER_DAY') or 1)
         if ns < want_s: kind = 'short'
         elif nl < want_l: kind = 'long'
         else:
