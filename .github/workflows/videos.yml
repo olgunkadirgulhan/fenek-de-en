@@ -49,6 +49,7 @@ jobs:
           SHORT_KINDS: "sahne,kelime,quiz,av,hata"
           HAS_YT: ${{ secrets.YT_REFRESH_TOKEN != '' }}
         run: |
+          if [ "${{ vars.CONTENT_MODE }}" = "howlong" ]; then echo "kanal How Long Would It Take? konseptinde (howlong.yml)"; echo "go=0" >> $GITHUB_OUTPUT; exit 0; fi
           if [ "$HAS_YT" != "true" ]; then echo "YouTube bağlı değil (auth_setup.py), atlanıyor"; echo "go=0" >> $GITHUB_OUTPUT; exit 0; fi
           python3 .github/slot_guard.py
 

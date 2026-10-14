@@ -28,8 +28,8 @@ jobs:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          CHANNEL_NAME: "German with Fenek"
-          CHANNEL_ABOUT: "Short German lessons for English speakers (A1-B1)."
+          CHANNEL_NAME: "How Long Would It Take?"
+          CHANNEL_ABOUT: "Timed thought experiments: how long it would take to reach places (the Moon, Mars, Everest) at different speeds, from a snail to light, using NASA and NOAA distances."
           CHANNEL_KIND: general
           CHANNEL_LANG: en
           STATE_FILE: comment_replies.json
