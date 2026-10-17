@@ -35,7 +35,7 @@ jobs:
           STATE_FILE: comment_replies.json
           REQUESTS_FILE: viewer_requests.json
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FIRST_QUESTIONS: "[\"Which {topic} word was new to you? 🤔\", \"How many did you get right? ✍️\", \"Can you make a sentence about {topic} in German? 🇩🇪\", \"Der, die or das: which one tricked you? 😅\", \"What topic should we learn after {topic}? 💡\", \"Which word would you use first in Germany? 🇩🇪\", \"Did you understand everything without subtitles? 👀\", \"Write one {topic} word you already knew 👇\", \"Which word is the hardest to pronounce? 🗣️\", \"What's your German level right now: A1, A2 or B1? 📚\", \"Where are you learning German from? 🌍\", \"Would you survive this {topic} situation in Germany? 😄\", \"Which word sounds the funniest to you? 😂\", \"How long have you been learning German? ⏳\", \"Try it: translate one {topic} word in the comments ✍️\"]"
+          FIRST_QUESTIONS: "[\"Did you guess right? 🤔\", \"What should we time next? ⏱️\", \"Which speed surprised you the most? 🚀\", \"Name a place and a speed and we will time it! 👇\", \"Would you make this trip? 🌍\", \"Was your guess too high or too low? 📏\", \"What is the farthest you have ever traveled? ✈️\"]"
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"
