@@ -16,6 +16,7 @@ import json
 import math
 import os
 import random
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
@@ -171,13 +172,50 @@ def sensible(dest, meth):
     return 1e-7 < h * 3600 < 3e19 * 3600 and not (DEST[dest][5] in ('up', 'down') and meth in ('plane', 'train', 'sound', 'probe', 'rocket') and DEST[dest][2] < 50)
 
 
+def tkey(t):
+    return ' '.join(re.sub(r'[^a-z0-9 ]', ' ', re.sub(r'#\w+', ' ', t.lower())).split())
+
+
+_KW = None
+
+
+def kurgu_weights(rows):
+    """2026-10-25: kurgu seçimi kanalın kendi izlenmesine göre (≥24 saatlik Shorts'ların kurgu medyanı / genel medyan).
+    Veri yoksa hepsi 1; hiç denenmemiş kurgu 1.5 (keşif). Sınırlar 0.3-4."""
+    global _KW
+    if _KW is not None: return _KW
+    _KW = {}
+    try:
+        cut = (datetime.now(timezone.utc) - timedelta(hours=24)).strftime('%Y-%m-%d %H:%M')
+        sh = [r for r in rows if r['kind'] == 'short' and r['date_utc'] < cut and r['video_id'] and r['topic_id'].startswith('hl:')]
+        if not sh or not os.environ.get('YT_REFRESH_TOKEN'): return _KW
+        import statistics as st, upload
+        api = upload.client(); views = {}
+        for i in range(0, len(sh), 50):
+            for it in api.videos().list(part='statistics', id=','.join(r['video_id'] for r in sh[i:i + 50])).execute().get('items', []):
+                views[it['id']] = int(it['statistics'].get('viewCount', 0))
+        by = {}
+        for r in sh:
+            if r['video_id'] in views: by.setdefault(r['topic_id'].split(':')[1], []).append(views[r['video_id']])
+        allv = [v for vs in by.values() for v in vs]
+        if not allv: return _KW
+        m = st.median(allv)
+        _KW = {k: max(0.3, min(4.0, (st.median(vs) + 20) / (m + 20))) for k, vs in by.items()}
+        log('kurgu ağırlıkları: ' + ', '.join(f'{k}={w:.2f}' for k, w in sorted(_KW.items(), key=lambda x: -x[1])))
+    except Exception as e:
+        log(f'kurgu ağırlıkları alınamadı: {e}')
+    return _KW
+
+
 def pick(rnd, kurgu=None):
     seen, rows = done(); recent = [r['topic_id'].split(':')[2] for r in rows[-4:] if r['topic_id'].count(':') >= 2]
     import howlong_more as HM
     last_k = [r['topic_id'].split(':')[1] for r in rows[-3:] if r['topic_id'].startswith('hl:')]
     allk = ['guess', 'race', 'ladder', 'light'] + HM.KURGU
+    kw = kurgu_weights(rows)
     for _ in range(3000):
-        k = kurgu or rnd.choice([x for x in allk if x not in last_k] or allk)
+        pool = [x for x in allk if x not in last_k] or allk
+        k = kurgu or rnd.choices(pool, weights=[kw.get(x, 1.5 if kw else 1) for x in pool])[0]
         if k in HM.KURGU:
             for _ in range(80):
                 key = HM.key_for(k, rnd)
@@ -481,10 +519,23 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y-%m-%d_%H%M')
     if kind == 'long':
         import howlong_long as L
-        key, tid = L.pick(rnd); v = L.build(key, rnd); log(f'[howlong-long] {tid} → {v["title"]}')
+        seen = {tkey(r['title']) for r in done()[1]}
+        for _ in range(25):
+            key, tid = L.pick(rnd); v = L.build(key, rnd)
+            if tkey(v['title']) not in seen: break
+        else:
+            raise SystemExit('25 denemede yeni başlık bulunamadı')
+        log(f'[howlong-long] {tid} → {v["title"]}')
         mp4 = L.render(v, OUT / f'long_{stamp}.mp4')
     else:
-        key, tid = pick(rnd, kurgu); v = build(key, rnd); log(f'[howlong] {tid} → {v["title"]}')
+        # 2026-10-25: aynı başlık iki kez yüklenmez (tekrar eden başlıkları YouTube dağıtmıyor)
+        seen = {tkey(r['title']) for r in done()[1]}
+        for _ in range(25):
+            key, tid = pick(rnd, kurgu); v = build(key, rnd)
+            if tkey(v['title']) not in seen: break
+        else:
+            raise SystemExit('25 denemede yeni başlık bulunamadı')
+        log(f'[howlong] {tid} → {v["title"]}')
         if 'scenes' in v:
             import howlong_more as HM
             mp4 = HM.render(v, OUT / f'short_{stamp}.mp4')
