@@ -5,7 +5,7 @@ Mesafeler NASA/NOAA/ölçüm kaynaklarından, hızlar kaynaklı ya da açıkça 
 süre = mesafe / hız. Her açıklamada kaynak + varsayım yazar. Kurgular (Short): guess (3 şıklı tahmin), race (iki yöntem
 yarışı), ladder (bir hedef, 4 yöntem), light (ışığın yaşı). Uzun (16:9): howlong_long.py.
 Görsel kimlik (diğer kanallara benzemesin): kırık beyaz zemin, kronometre rakamları (Share Tech Mono), mavi rota,
-Fluent 3D emojiler (MIT), İngiliz kadın anlatıcı (en-GB-SoniaNeural).
+Fluent 3D emojiler (MIT), İngiliz kadın anlatıcı (Kokoro bf_emma).
 
   python howlong.py --dry-run [--kurgu guess|race|ladder|light]
   python howlong.py --auto      # zamanlanmış: kota gününün sonunda 3 Short + 2 uzun, publishAt ile ABD saatine
@@ -414,18 +414,27 @@ def frame(base, v, bi, t, dur):
 
 
 # ---------------------------------------------------------------- ses + video
-def tts(text, path):
-    import edge_tts
+KOKORO_VOICE = os.environ.get('HL_KOKORO_VOICE', 'bf_emma')   # İngiliz kadın anlatıcı (Kokoro, Apache-2.0: ücretsiz, ticari kullanım serbest)
+_kokoro = None
 
-    async def go():
-        await edge_tts.Communicate(text, VOICE, rate='+4%').save(str(path))
+
+def tts(text, path):
+    """Seslendirme: Kokoro (açık kaynak, GitHub'da çalışır, kota yok)."""
+    global _kokoro
+    import numpy as np, soundfile as sf
     for i in range(3):
         try:
-            asyncio.run(go())
+            if _kokoro is None:
+                from kokoro import KPipeline
+                _kokoro = KPipeline(lang_code='b' if KOKORO_VOICE[0] == 'b' else 'a')
+            audio = np.concatenate([a for _, _, a in _kokoro(text, voice=KOKORO_VOICE, speed=1.04)])
+            wav = Path(str(path) + '.wav'); sf.write(str(wav), audio, 24000)
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(wav), '-ar', '44100', '-ac', '1', '-b:a', '160k', str(path)], check=True)
+            wav.unlink(missing_ok=True)
             if path.exists() and path.stat().st_size > 1000: return
         except Exception as e:
             log(f'  tts deneme {i + 1}: {e}')
-    raise RuntimeError('edge-tts çalışmadı')
+    raise RuntimeError('seslendirme çalışmadı')
 
 
 def dur(p):
