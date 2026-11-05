@@ -95,10 +95,16 @@
    "format": "kelime",
    "topic": "a2adv",
    "title": "Do you know these 5 German words? Linking words 🔗 #german"
+  },
+  {
+   "id": "20261105-2040-sahne",
+   "format": "sahne",
+   "topic": "cooking",
+   "title": "Real-life German: In the kitchen 🍳 A2"
   }
  ],
  "bank_used": [],
- "count": 16,
+ "count": 17,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -114,6 +120,7 @@
   "sahne|restaurant|Außerdem wollte ich das Steak blutig, aber es ist durchgebraten./Danke. Eigentlich beschwere ich mich nicht gern./Das tut mir sehr leid. Ich spreche sofort mit dem Koch./Der Nachtisch geht als Entschuldigung auf uns./Entschuldigung, es gibt ein Problem. Mein Hauptgericht ist kalt./Natürlich. Und probieren Sie unbedingt den neuen Nachtisch auf der Speisekarte!/Sehr nett. Kann ich die Rechnung haben? Rechnen Sie bitte auch das Trinkgeld dazu./Sie haben recht. Ich bringe Ihnen ein neues. War die Soße übrigens zu scharf?/der Koch",
   "kelime|a1small|nur/okay/welcher/wie viel/wo",
   "quiz|b1events|das Zuckerfest/die Ausstellung/die Feier",
-  "kelime|a2adv|mindestens/plötzlich/seit/zuerst/überall"
+  "kelime|a2adv|mindestens/plötzlich/seit/zuerst/überall",
+  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl"
  ]
 }
