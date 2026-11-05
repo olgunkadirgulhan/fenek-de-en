@@ -1,0 +1,56 @@
+name: emoji
+# Emoji bulmaca Shorts (2026-11-05; How Long Would It Take? kanalının yeni konsepti, emoji.py).
+# How Long gibi kota gününün SONUNDA yükler (00-06 UTC; aynı Google projesindeki Bloop'tan sonra), publishAt ile ABD saatinde yayınlar.
+on:
+  schedule:
+    - cron: "17 0-6 * * *"
+    - cron: "47 0-6 * * *"
+  workflow_dispatch:
+    inputs:
+      auto:
+        description: Planlı çalışma gibi davran (yükler)
+        type: boolean
+        default: false
+      kurgu:
+        description: "odd | spot (boş = rastgele)"
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+jobs:
+  make:
+    if: (github.event_name != 'schedule' && !inputs.auto) || vars.CONTENT_MODE == 'emoji'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: pip install -q Pillow numpy google-api-python-client google-auth requests
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
+          SHORTS_PER_DAY: ${{ vars.EMOJI_PER_DAY || '3' }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.auto }}" = "true" ]; then python emoji.py --auto; exit 0; fi
+          python emoji.py --dry-run ${{ inputs.kurgu && format('--kurgu {0}', inputs.kurgu) || '' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: emoji-${{ github.run_id }}
+          path: out/emoji/*.mp4
+          retention-days: 7
+      - name: Kaydı sakla
+        if: always()
+        run: |
+          git config user.name "emoji-bot"; git config user.email "bot@users.noreply.github.com"
+          git add emoji_published.csv 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -qm "emoji: kayıt $(date -u +%F-%H%M)"
+          for i in 1 2 3 4 5 6 7 8; do git pull --rebase -q && git push -q && break; sleep $((i*15)); done
