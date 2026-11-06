@@ -101,10 +101,16 @@
    "format": "sahne",
    "topic": "cooking",
    "title": "Real-life German: In the kitchen 🍳 A2"
+  },
+  {
+   "id": "20261106-1957-av",
+   "format": "av",
+   "topic": "a1small",
+   "title": "5 German words are hidden here 🔍 Can you find them? | Questions & little words"
   }
  ],
  "bank_used": [],
- "count": 17,
+ "count": 18,
  "sigs": [
   "sahne|cafe|Bitte schön. Einen schönen Tag noch!/Das macht sieben Euro./Ein Glas Wasser, bitte./Einen Kaffee mit Milch, bitte./Guten Morgen! Was möchten Sie?/Mit Zucker?/Nein, danke. Und ein Stück Kuchen./Sonst noch etwas?/der Kaffee",
   "quiz|a2land|das Insekt/der Gipfel/die Küste",
@@ -121,6 +127,7 @@
   "kelime|a1small|nur/okay/welcher/wie viel/wo",
   "quiz|b1events|das Zuckerfest/die Ausstellung/die Feier",
   "kelime|a2adv|mindestens/plötzlich/seit/zuerst/überall",
-  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl"
+  "sahne|cooking|Dann braten wir sie im Topf an./Es riecht schon wunderbar!/Gern! Was brauchen wir?/Ich schneide die Zwiebel und den Knoblauch./Nur eine Prise. Und am Ende zwanzig Minuten in den Ofen./Tomaten, eine Zwiebel, Knoblauch und etwas Olivenöl./Wie viele Löffel Salz nehmen wir?/Wollen wir heute Abend das Rezept meiner Oma ausprobieren?/das Olivenöl",
+  "av|a1small|alle/nur/ohne/okay/weniger"
  ]
 }
