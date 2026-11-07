@@ -54,9 +54,26 @@ ODD = {
 LEVELS = [('EASY', 'easy', (6, 8)), ('MEDIUM', 'medium', (7, 10)), ('HARD', 'hard', (8, 11))]
 SPOT_POOL = list('🍎🍌🍇🍓🍒🍑🍍🥝🥕🌽🍄🌵🌻🌈⭐🌙⚽🏀🎈🎁🎃🐶🐱🐸🐵🐔🐧🐙🦋🐞🍩🍪🍰🧁🍿🚗🚀⛵🎸🎲🔑💎👑🎩🧸')
 
+# 2026-11-07 'guess' (trend: "guess the emoji" medyan 1.1M, 19 kanal): emoji ipuçlarından kelime/ülke. FE0F'siz, tek satır.
+GUESS = {
+    'WORD': [('🌞🌻', 'SUNFLOWER'), ('🐱🐟', 'CATFISH'), ('⭐🐟', 'STARFISH'), ('🐶🏠', 'DOGHOUSE'), ('🔥🚒', 'FIRE TRUCK'),
+             ('🍯🌙', 'HONEYMOON'), ('🧈🪰', 'BUTTERFLY'), ('🌞👓', 'SUNGLASSES'), ('🍳🎂', 'PANCAKE'), ('💥🌽', 'POPCORN'),
+             ('☕🎂', 'CUPCAKE'), ('🔥🐶', 'HOT DOG'), ('📚🐛', 'BOOKWORM'), ('🌲🍎', 'PINEAPPLE'), ('💧🍈', 'WATERMELON'),
+             ('🚗🐶', 'CARPET'), ('✋👜', 'HANDBAG'), ('🌊🐴', 'SEAHORSE'), ('🌙🚶', 'MOONWALK'), ('☔🧥', 'RAINCOAT'),
+             ('🐉🪰', 'DRAGONFLY'), ('🐴👟', 'HORSESHOE'), ('🔵🍓', 'BLUEBERRY'), ('🥇🐟', 'GOLDFISH'), ('🌍💥', 'EARTHQUAKE'),
+             ('🦶🏈', 'FOOTBALL'), ('🌙💡', 'MOONLIGHT'), ('🥜🧈', 'PEANUT BUTTER'), ('🍯🐝', 'HONEYBEE'), ('🧀🍔', 'CHEESEBURGER')],
+    'COUNTRY': [('🍕🍝', 'ITALY'), ('🌮🌵', 'MEXICO'), ('🥐🗼', 'FRANCE'), ('🍣🗻', 'JAPAN'), ('🦘🐨', 'AUSTRALIA'),
+                ('🍁🦫', 'CANADA'), ('🐼🥟', 'CHINA'), ('🍔🗽', 'USA'), ('🌷🧀🚲', 'NETHERLANDS'), ('🧇🍫', 'BELGIUM'),
+                ('🥨🍺', 'GERMANY'), ('🐫🔺', 'EGYPT'), ('⚽☕🦜', 'BRAZIL'), ('🐘🍛', 'INDIA'), ('🦁🦒', 'KENYA'),
+                ('🫖💂', 'UK'), ('🥘💃', 'SPAIN'), ('🍫⌚🧀', 'SWITZERLAND'), ('🥝🐑', 'NEW ZEALAND'), ('🍜🛵', 'VIETNAM')],
+}
+GUESS_N, GUESS_T, GUESS_R = 5, 4.0, 1.6
+
 TITLES = {
     'odd': ['Find the Odd Emoji: {a} vs {b} 👀 Can You Find All 3?', 'Find the Different Emoji 🔍 {a} {b} (Easy to Hard)',
             'Odd One Out: {a} or {b}? 😳 3 Levels', 'Can You Spot the Odd Emoji? {a} {b} 🧐', 'Emoji Challenge: Find the {b} 👀'],
+    'guess': ['Guess the {cat} From Emojis: {a} 🤔 5 Puzzles', 'Emoji Quiz: Can You Guess All 5? {a}', 'Guess the Emoji {cat}: {a} = ? 🧠',
+              'Only Emojis: Guess the {cat} 🤔 {a}'],
     'spot': ['Spot the Difference: 3 Emoji Changes 🔍 {a}', 'Find 3 Differences in 10 Seconds 👀 {a}{b}',
              'Emoji Spot the Difference 🧐 {a} Edition', 'Can You Find All 3 Differences? {a}{b} 🔍'],
 }
@@ -95,6 +112,9 @@ def make_plan(kurgu, rnd):
             if rnd.random() < 0.5: a, b = b, a
             levels.append(dict(name=name, a=a, b=b, cols=cols, rows=rows, pos=rnd.randrange(cols * rows)))
         return dict(kurgu='odd', levels=levels, seed=rnd.randrange(10 ** 6))
+    if kurgu == 'guess':
+        cat = rnd.choice(list(GUESS))
+        return dict(kurgu='guess', cat=cat, items=rnd.sample(GUESS[cat], GUESS_N), seed=rnd.randrange(10 ** 6))
     cols, rows = 5, 5
     grid = [rnd.choice(SPOT_POOL) for _ in range(cols * rows)]
     diffs = rnd.sample(range(cols * rows), 3)
@@ -107,6 +127,8 @@ def make_plan(kurgu, rnd):
 def plan_key(p):
     if p['kurgu'] == 'odd':
         return 'em:odd:' + '|'.join(f"{L['a']}{L['b']}" for L in p['levels'])
+    if p['kurgu'] == 'guess':
+        return 'em:guess:' + p['cat'] + ':' + '|'.join(e for e, _ in p['items'])
     return 'em:spot:' + ''.join(p['grid']) + ':' + ','.join(map(str, sorted(p['diffs'])))
 
 
@@ -119,6 +141,11 @@ def timeline(p):
         segs, t = [], INTRO
         for i in range(len(p['levels'])):
             segs.append((t, t + SEARCH, t + SEARCH + REVEAL, i)); t += SEARCH + REVEAL
+        return segs, t + OUTRO
+    if p['kurgu'] == 'guess':
+        segs, t = [], INTRO
+        for i in range(len(p['items'])):
+            segs.append((t, t + GUESS_T, t + GUESS_T + GUESS_R, i)); t += GUESS_T + GUESS_R
         return segs, t + OUTRO
     t0 = INTRO
     return [(t0, t0 + 9.0, t0 + 9.0 + 2.2, 0)], t0 + 9.0 + 2.2 + OUTRO
@@ -178,22 +205,38 @@ def frame(p, T):
     img = background().copy()
     d = ImageDraw.Draw(img)
     segs, total = timeline(p)
-    head = 'FIND THE ODD EMOJI' if p['kurgu'] == 'odd' else 'SPOT 3 DIFFERENCES'
+    head = {'odd': 'FIND THE ODD EMOJI', 'spot': 'SPOT 3 DIFFERENCES', 'guess': f"GUESS THE {p.get('cat', '')}"}[p['kurgu']]
     d.rectangle([0, 0, W, 300], fill=INK + (235,))
     text(d, (W / 2, 120), head, 86, fill=(255, 220, 60))
     if T < INTRO:   # kanca
         u = ease(T / 0.5)
-        text(d, (W / 2, 820), 'CAN YOU FIND' if p['kurgu'] == 'odd' else 'CAN YOU SPOT', int(110 * u) + 1)
-        text(d, (W / 2, 960), 'ALL 3?' , int(150 * u) + 1, fill=(255, 235, 80))
+        n = len(p['items']) if p['kurgu'] == 'guess' else 3
+        text(d, (W / 2, 820), {'odd': 'CAN YOU FIND', 'spot': 'CAN YOU SPOT', 'guess': 'CAN YOU GUESS'}[p['kurgu']], int(110 * u) + 1)
+        text(d, (W / 2, 960), f'ALL {n}?', int(150 * u) + 1, fill=(255, 235, 80))
         return img
     if T >= segs[-1][2]:   # kapanış: yorum çağrısı
         u = ease((T - segs[-1][2]) / 0.5)
         text(d, (W / 2, 760), 'HOW MANY DID', int(100 * u) + 1)
         text(d, (W / 2, 880), 'YOU GET?', int(120 * u) + 1, fill=(255, 235, 80))
-        text(d, (W / 2, 1060), 'COMMENT 0, 1, 2 OR 3', int(70 * u) + 1)
+        text(d, (W / 2, 1060), 'COMMENT YOUR SCORE' if p['kurgu'] == 'guess' else 'COMMENT 0, 1, 2 OR 3', int(70 * u) + 1)
         e = emoji_img('👇', 150); img.alpha_composite(e, (int(W / 2 - 75), 1150))
         return img
     s0, s1, s2, i = next(s for s in segs if s[0] <= T < s[2])
+    if p['kurgu'] == 'guess':
+        em, ans = p['items'][i]
+        text(d, (W / 2, 230), f"PUZZLE {i + 1} OF {len(p['items'])}", 60)
+        d.rounded_rectangle([90, 560, W - 90, 1260], radius=48, fill=(255, 255, 255, 235))
+        e = emoji_img(em, 330 if len(em) <= 2 else 260)
+        pop = ease((T - s0) / 0.35)
+        if pop > 0.02:
+            e2 = e.resize((max(1, int(e.width * pop)), max(1, int(e.height * pop))))
+            img.alpha_composite(e2, (int(W / 2 - e2.width / 2), int(910 - e2.height / 2)))
+        if T < s1:
+            left = s1 - T; timer_bar(img, left / GUESS_T, f'{math.ceil(left)}')
+        else:
+            u = ease((T - s1) / 0.3)
+            text(d, (W / 2, 1420), ans, int((96 if len(ans) < 12 else 76) * u) + 1, fill=(255, 235, 80))
+        return img
     if p['kurgu'] == 'odd':
         L = p['levels'][i]
         items = [L['a']] * (L['cols'] * L['rows']); items[L['pos']] = L['b']
@@ -302,14 +345,19 @@ def done():
 def metadata(p, rnd, seen_titles):
     if p['kurgu'] == 'odd':
         L = p['levels'][-1]; a, b = L['a'], L['b']
+    elif p['kurgu'] == 'guess':
+        a, b = p['items'][0][0], p['items'][1][0]
     else:
         a, b = p['grid'][0], p['grid'][1]
-    opts = [t.format(a=a, b=b) for t in TITLES[p['kurgu']]]; rnd.shuffle(opts)
+    opts = [t.format(a=a, b=b, cat=p.get('cat', '').title()) for t in TITLES[p['kurgu']]]; rnd.shuffle(opts)
     # emojiler tkey'de silinir → anahtara emojiyi de kat ki farklı çiftler farklı başlık sayılsın
     title = next((o for o in opts if tkey(o) not in seen_titles), None)
     if p['kurgu'] == 'odd':
         desc = ('Find the odd emoji in 3 levels: easy, medium and hard. Pause if you need more time!\n\n'
                 + '\n'.join(f"Level {i + 1}: {L['a']} vs {L['b']}" for i, L in enumerate(p['levels'])))
+    elif p['kurgu'] == 'guess':
+        desc = (f"Guess the {p['cat'].lower()} from the emojis before the timer runs out!\n\n"
+                + '\n'.join(f'{i + 1}. {e} = {a_}' for i, (e, a_) in enumerate(p['items'])))
     else:
         desc = 'Spot the 3 differences between the top and bottom emoji grids before the timer runs out!'
     desc += ('\n\nHow many did you get? Comment below 👇 New emoji puzzles every day.\n\n'
@@ -358,7 +406,7 @@ def main():
     rnd = random.Random()
     recent = [r['topic_id'].split(':')[1] for r in rows[-2:]]
     for _ in range(200):
-        k = kurgu or rnd.choices(['odd', 'spot'], weights=[1 if recent.count('odd') == 2 else 3, 1])[0]
+        k = kurgu or rnd.choices(['odd', 'spot', 'guess'], weights=[1 if recent.count('odd') == 2 else 3, 1, 2])[0]
         p = make_plan(k, rnd)
         tid = plan_key(p)
         title, desc, tags = metadata(p, rnd, seen_titles)
