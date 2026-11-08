@@ -219,6 +219,7 @@ def frame(p, T):
         text(d, (W / 2, 760), 'HOW MANY DID', int(100 * u) + 1)
         text(d, (W / 2, 880), 'YOU GET?', int(120 * u) + 1, fill=(255, 235, 80))
         text(d, (W / 2, 1060), 'COMMENT YOUR SCORE' if p['kurgu'] == 'guess' else 'COMMENT 0, 1, 2 OR 3', int(70 * u) + 1)
+        if p.get('n'): text(d, (W / 2, 1420), f"NEXT: CHALLENGE #{p['n'] + 1}", int(60 * u) + 1, fill=(255, 235, 80))
         e = emoji_img('👇', 150); img.alpha_composite(e, (int(W / 2 - 75), 1150))
         return img
     s0, s1, s2, i = next(s for s in segs if s[0] <= T < s[2])
@@ -349,7 +350,9 @@ def metadata(p, rnd, seen_titles):
         a, b = p['items'][0][0], p['items'][1][0]
     else:
         a, b = p['grid'][0], p['grid'][1]
-    opts = [t.format(a=a, b=b, cat=p.get('cat', '').title()) for t in TITLES[p['kurgu']]]; rnd.shuffle(opts)
+    n = len(done()[1]) + 1   # 2026-11-08: seri numarası (#N) → "devamı yarın" hissi, abone dönüşümü
+    p['n'] = n
+    opts = [t.format(a=a, b=b, cat=p.get('cat', '').title()) + f' #{n}' for t in TITLES[p['kurgu']]]; rnd.shuffle(opts)
     # emojiler tkey'de silinir → anahtara emojiyi de kat ki farklı çiftler farklı başlık sayılsın
     title = next((o for o in opts if tkey(o) not in seen_titles), None)
     if p['kurgu'] == 'odd':
