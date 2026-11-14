@@ -409,7 +409,7 @@ def main():
     rnd = random.Random()
     recent = [r['topic_id'].split(':')[1] for r in rows[-2:]]
     for _ in range(200):
-        k = kurgu or rnd.choices(['odd', 'spot', 'guess'], weights=[1 if recent.count('odd') == 2 else 3, 1, 2])[0]
+        k = kurgu or rnd.choices(['odd', 'spot', 'guess'], weights=[2 if recent.count('odd') == 2 else 6, 0.5, 2])[0]   # 2026-11-14: odd ~800-1180, spot çoğu 100-250, guess 370-1000
         p = make_plan(k, rnd)
         tid = plan_key(p)
         title, desc, tags = metadata(p, rnd, seen_titles)
